@@ -18,5 +18,14 @@ jobs:
         uses: py-actions/py-dependency-install@v3
         with:
           path: "./requirements.txt"
-      - name: Lancer l'application
-        run: pytest
+      - name: Create Issue on Failed workflow
+        if: ${{ failure() }}
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: Action workflow failed.
+          body: |
+            Workflow name - `${{ github.workflow }}`
+            Job -           `${{ github.job }}`
+            status -        `${{ job.status }}`
+        
