@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '2.x', 'pypy-2.7', 'pypy-3.7', 'pypy-3.8' ]
+        python-version: [ '2.x', '3.x', 'pypy-2.7', 'pypy-3.7', 'pypy-3.8' ]
     steps:
       - uses: actions/checkout@v3
       - name: Installation python
@@ -18,6 +18,10 @@ jobs:
         uses: py-actions/py-dependency-install@v3
         with:
           path: "./requirements.txt"
+      - name: Lancer Application
+        run: pytest
+      - name: create an issue
+        uses: dacbd/create-issue-action@main
       - name: Create Issue on Failed workflow
         if: ${{ failure() }}
         uses: dacbd/create-issue-action@main
