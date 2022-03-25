@@ -26,7 +26,6 @@ jobs:
         if: ${{ failure() }}
         uses: dacbd/create-issue-action@main
         with:
-          token: ${{ github.token }}
           title: Action workflow failed.
           body: |
             Workflow name - `${{ github.workflow }}`
