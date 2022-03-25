@@ -20,12 +20,11 @@ jobs:
           path: "./requirements.txt"
       - name: Lancer Application
         run: pytest
-      - name: create an issue
-        uses: dacbd/create-issue-action@main
       - name: Create Issue on Failed workflow
         if: ${{ failure() }}
         uses: dacbd/create-issue-action@main
         with:
+          token: ${{ github.token }}
           title: Action workflow failed.
           body: |
             Workflow name - `${{ github.workflow }}`
